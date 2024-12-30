@@ -37,7 +37,27 @@ function bootSequence() {
 }
 
 bootSequence(); // Ejecutar la secuencia de inicio
+// Seleccionar el campo de entrada oculto
+const hiddenInput = document.getElementById('hidden-input');
 
+// Enfocar el campo de entrada al tocar la pantalla
+document.addEventListener('click', () => {
+  hiddenInput.focus();
+});
+
+// Manejar eventos del teclado desde el campo de entrada
+hiddenInput.addEventListener('input', (event) => {
+  const value = event.target.value;
+  inputBuffer = value; // Actualizar el buffer con el valor del input
+  updateCursor(); // Actualizar la consola
+});
+
+// Limpiar el campo después de presionar Enter
+document.addEventListener('keydown', (event) => {
+  if (event.key === "Enter") {
+    hiddenInput.value = ""; // Limpiar el input
+  }
+});
 // Mostrar el cursor inicial
 function initializeCursor() {
   const existingCursor = document.getElementById('cursor-line');
