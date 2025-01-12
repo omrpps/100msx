@@ -1,128 +1,123 @@
-/* Estilos generales */
+/* Tipografía MSX */
 @font-face {
-    font-family: 'MSX';
-    src: url('../fuentes/MSX.ttf') format('truetype');
-  }
-  
-  body {
-    background-color: #0000AA;
-    color: white;
-    font-family: 'MSX', monospace;
-    font-size: calc(16px + 0.5vw);
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
-  
-/* Contenedor principal de la consola */
-#console {
-  white-space: pre-wrap; /* Permitir saltos de línea */
-  word-wrap: break-word; /* Ajustar palabras largas */
-  overflow-wrap: break-word; /* Ajustar palabras largas */
-  padding: 20px;
-  width: 95%; /* Aprovechar casi todo el ancho disponible */
-  max-width: 1200px; /* Limitar el ancho máximo en pantallas grandes */
-  height: 90vh; /* Usar el 90% de la altura de la pantalla */
-  margin: auto; /* Centrar horizontalmente */
-  border: 1px solid white;
-  font-family: 'MSX', monospace;
-  font-size: calc(10px + 1vw); /* Tamaño de texto ajustable */
-  line-height: 1.2; /* Ajuste entre líneas */
-  overflow-y: auto; /* Scroll vertical si el contenido excede */
-  overflow-x: hidden; /* Evitar scroll horizontal */
-  background-color: #0000AA; /* Fondo azul clásico */
-  color: white; /* Texto en blanco */
-  box-sizing: border-box; /* Incluir padding y borde en el tamaño total */
+  font-family: 'MSX';
+  src: url('../fuentes/MSX.ttf') format('truetype');
 }
 
-/* Estilo para el cursor parpadeante */
+/* 1. Fondo azul claro y centrado con flex */
+body {
+  background-color: #00AAFF;  /* Azul claro para el "marco" */
+  margin: 0;
+  padding: 0;
+  display: flex;             /* Flexbox para centrar #console */
+  justify-content: center;   /* Centrar horizontalmente */
+  align-items: center;       /* Centrar verticalmente */
+  width: 100vw;              /* Ocupar el ancho completo */
+  height: 100vh;             /* Ocupar la altura completa */
+  font-family: 'MSX', monospace;
+  color: white;
+}
+
+/* 2. Pantalla MSX: color azul oscuro y casi toda la pantalla */
+#console {
+  background-color: #0000AA; /* Azul MSX */
+  width: 95vw;               /* 95% del ancho viewport */
+  height: 95vh;              /* 95% de la altura viewport */
+  border: none;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow-y: auto;          /* Scroll vertical si excede */
+  overflow-x: hidden;        /* Evitar scroll horizontal */
+  font-size: calc(10px + 1vw);
+  line-height: 1.2;
+  white-space: pre-wrap; /* Importante para que \n se muestre como salto de línea */
+}
+
+/* Cursor parpadeante */
 .cursor-blink {
-  display: inline; /* Mostrar en línea */
-  animation: blink 1s steps(2, start) infinite; /* Parpadeo */
+  display: inline;
+  animation: blink 1s steps(2, start) infinite;
 }
 
 @keyframes blink {
   50% {
-    opacity: 0; /* Hacer invisible al 50% */
+    opacity: 0;
   }
 }
 
-/* Estilos para pantallas pequeñas (teléfonos y tablets) */
-@media (max-width: 768px) {
-  #console {
-    width: 100%; /* Usar todo el ancho disponible */
-    height: 85vh; /* Ajustar altura en móviles */
-    font-size: calc(8px + 1vw); /* Reducir tamaño de fuente en pantallas pequeñas */
+/* Efecto cassette-loading (igual que tu código) */
+#cassette-loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    red,
+    red 10px,
+    yellow 10px,
+    yellow 20px,
+    blue 20px,
+    blue 30px
+  );
+  animation: bands 0.1s linear infinite;
+  z-index: 1000;
+}
+
+@keyframes bands {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 50px;
   }
 }
-  
-  #cassette-loading {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: repeating-linear-gradient(
-      0deg,
-      red,
-      red 10px,
-      yellow 10px,
-      yellow 20px,
-      blue 20px,
-      blue 30px
-    );
-    animation: bands 0.1s linear infinite;
-    z-index: 1000;
+
+/* Ventana de cookies (igual que tu código) */
+#cookie-popup {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  background-color: #0000AA;
+  color: white;
+  font-family: 'MSX', monospace;
+  padding: 20px;
+  border: 1px solid white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+}
+
+#cookie-popup.hidden {
+  display: none;
+}
+
+#cookie-buttons button,
+#cookie-customize button {
+  font-family: 'MSX', monospace;
+  background-color: white;
+  color: #0000AA;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+#cookie-customize {
+  margin-top: 10px;
+}
+
+#cookie-customize.hidden {
+  display: none;
+}
+
+/* (Opcional) Ajustes en pantallas pequeñas */
+@media (max-width: 768px) {
+  #console {
+    width: 90vw;  
+    height: 90vh; 
+    font-size: calc(8px + 2vw);
   }
-  
-  @keyframes bands {
-    0% {
-      background-position: 0 0;
-    }
-    100% {
-      background-position: 0 50px;
-    }
-  }
-  
-  /* Ventana de Cookies */
-  #cookie-popup {
-    position: fixed;
-    bottom: 20px;
-    left: 20px;
-    right: 20px;
-    background-color: #0000AA;
-    color: white;
-    font-family: 'MSX', monospace;
-    padding: 20px;
-    border: 1px solid white;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    z-index: 1000;
-  }
-  
-  #cookie-popup.hidden {
-    display: none;
-  }
-  
-  #cookie-buttons button,
-  #cookie-customize button {
-    font-family: 'MSX', monospace;
-    background-color: white;
-    color: #0000AA;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-    margin-right: 10px;
-  }
-  
-  #cookie-customize {
-    margin-top: 10px;
-  }
-  
-  #cookie-customize.hidden {
-    display: none;
-  }
-  
+}
